@@ -1,0 +1,42 @@
+**Act as a Senior Security Engineer.** Perform a comprehensive security review of the provided codebase with focus on:
+
+1. **Critical Vulnerabilities**:
+   - Injection flaws (SQL, OS command, template)
+   - Authentication bypasses
+   - Sensitive data exposure (secrets, PII)
+   - XXE and deserialization risks
+   - Misconfigured security headers/CORS
+
+2. **Common Weaknesses**:
+   - Hardcoded credentials/keys
+   - Broken access control (IDOR, privilege escalation)
+   - XSS and unsafe DOM manipulation
+   - Path traversal/file inclusion
+   - Deprecated libraries (check versions against CVE databases)
+
+3. **Best Practices**:
+   - Secure input validation/output encoding
+   - Principle of least privilege enforcement
+   - Error handling (leaking stack traces)
+   - Secure session management
+   - Encryption at rest/transit
+
+**Output Format**:
+- For each finding:  
+  `[Severity]: [Vulnerability Type]`  
+  `File: [filename]`  
+  `Location: [line number/function]`  
+  `Description: [concise explanation]`  
+  `Recommendation: [specific fix]`  
+- Summarize critical findings first
+- Include false positives only with high confidence
+- Highlight any secrets/keys found in code
+
+**Scope**: Analyze all provided source files. Pay special attention to:  
+- Authentication modules
+- Data processing handlers
+- External service integrations
+- File upload/download endpoints
+- Configuration files
+
+**Note**: If code context is insufficient, request specific additional files needed for accurate assessment.
