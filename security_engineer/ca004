@@ -1,0 +1,192 @@
+# Claude Code Security Analysis Prompt
+
+## Primary Objective
+Perform a comprehensive security analysis of this codebase, identifying vulnerabilities, security anti-patterns, and providing actionable remediation recommendations.
+
+## Analysis Framework
+
+### 1. Initial Reconnaissance
+- Scan the entire directory structure to understand the project architecture
+- Identify the technology stack, frameworks, and dependencies
+- Map out entry points, data flows, and trust boundaries
+- Document the application's attack surface
+
+### 2. Vulnerability Categories to Analyze
+
+#### A. Input Validation & Injection Attacks
+- SQL injection vulnerabilities in database queries
+- NoSQL injection in MongoDB/document database operations
+- Command injection in system calls and subprocess executions
+- LDAP injection in directory service queries
+- XML/XXE injection in XML parsers
+- Code injection through eval(), exec(), or similar functions
+- Path traversal vulnerabilities in file operations
+- Server-side template injection (SSTI)
+
+#### B. Authentication & Authorization
+- Weak password policies and storage mechanisms
+- Session management flaws (fixation, hijacking, weak tokens)
+- Broken access controls and privilege escalation paths
+- JWT security issues (weak secrets, algorithm confusion)
+- OAuth/OIDC implementation vulnerabilities
+- Multi-factor authentication bypasses
+- Insecure direct object references (IDOR)
+
+#### C. Cryptographic Issues
+- Use of deprecated/weak cryptographic algorithms
+- Hardcoded cryptographic keys and secrets
+- Insufficient entropy in random number generation
+- Improper certificate validation
+- Weak hashing algorithms for passwords
+- Encryption key management issues
+- Side-channel attack vulnerabilities
+
+#### D. Web Application Security (if applicable)
+- Cross-site scripting (XSS) - reflected, stored, DOM-based
+- Cross-site request forgery (CSRF) protection
+- Clickjacking and frame injection vulnerabilities
+- Content Security Policy (CSP) implementation
+- HTTP security headers analysis
+- Cookie security attributes
+- Same-origin policy bypasses
+
+#### E. API Security (if applicable)
+- API authentication and authorization mechanisms
+- Rate limiting and abuse prevention
+- Input validation on API endpoints
+- API versioning security considerations
+- GraphQL-specific vulnerabilities (if applicable)
+- REST API security best practices compliance
+
+#### F. Configuration & Environment Security
+- Sensitive information in configuration files
+- Debug mode enabled in production
+- Verbose error messages exposing system information
+- Insecure file permissions
+- Default credentials and configurations
+- Environment variable security
+- Container security misconfigurations (if applicable)
+
+#### G. Dependency & Supply Chain Security
+- Known vulnerabilities in third-party dependencies
+- Dependency confusion attacks potential
+- Malicious package detection
+- License compliance and security implications
+- Outdated dependencies with security patches available
+
+#### H. Business Logic Flaws
+- Race conditions in critical operations
+- Time-of-check vs time-of-use (TOCTOU) issues
+- Workflow bypasses and logic flaws
+- Resource exhaustion vulnerabilities
+- Integer overflow/underflow conditions
+
+### 3. Analysis Methodology
+
+#### Static Analysis Approach
+1. **Code Pattern Recognition**: Search for known vulnerable code patterns
+2. **Data Flow Analysis**: Trace user input from entry points to sensitive operations
+3. **Control Flow Analysis**: Examine authentication and authorization logic paths
+4. **Configuration Review**: Analyze configuration files for security misconfigurations
+
+#### Risk Assessment Criteria
+For each finding, provide:
+- **Severity Level**: Critical/High/Medium/Low/Info
+- **Exploitability**: How easy it is to exploit the vulnerability
+- **Impact Assessment**: Potential damage if exploited
+- **CVSS Score**: If applicable, provide CVSS 3.1 scoring
+- **CWE Classification**: Map to relevant Common Weakness Enumeration
+
+### 4. Detailed Reporting Requirements
+
+#### For Each Vulnerability Found:
+```markdown
+## [SEVERITY] Vulnerability Title
+**File**: path/to/vulnerable/file.ext
+**Line(s)**: XX-YY
+**CWE**: CWE-XXX
+**CVSS Score**: X.X
+
+### Description
+[Clear description of the vulnerability]
+
+### Vulnerable Code
+```language
+[Exact vulnerable code snippet]
+```
+
+### Impact
+[Detailed explanation of potential impact]
+
+### Proof of Concept
+[If possible, provide PoC or exploitation scenario]
+
+### Remediation
+[Specific, actionable fix recommendations]
+
+### Secure Code Example
+```language
+[Example of secure implementation]
+```
+```
+
+### 5. Security Recommendations
+
+#### Immediate Actions (Critical/High Severity)
+- Prioritized list of critical fixes needed immediately
+
+#### Short-term Improvements (Medium Severity)
+- Security enhancements to implement within 1-2 sprints
+
+#### Long-term Security Strategy
+- Architectural improvements and security practices to adopt
+- Security testing integration recommendations
+- Developer training needs identification
+
+### 6. Compliance & Standards Analysis
+Check compliance against relevant standards:
+- OWASP Top 10
+- SANS Top 25
+- PCI DSS (if handling payment data)
+- GDPR/privacy requirements (if handling personal data)
+- Industry-specific security standards
+
+## Output Format Instructions
+
+### Executive Summary
+Provide a high-level summary suitable for management, including:
+- Total number of vulnerabilities by severity
+- Most critical risks identified
+- Overall security posture assessment
+- Key recommendations with business impact
+
+### Technical Report
+Detailed technical findings with:
+- Complete vulnerability catalog
+- Evidence and proof-of-concept examples
+- Specific remediation instructions
+- Code snippets showing secure alternatives
+
+### Actionable Remediation Plan
+- Prioritized task list with effort estimates
+- Quick wins that can be implemented immediately
+- Dependencies between fixes
+- Testing recommendations for each fix
+
+## Analysis Instructions
+
+1. **Be Thorough**: Don't just scan for obvious issues; look for subtle logic flaws and edge cases
+2. **Context Matters**: Consider the specific business context and data sensitivity
+3. **Prioritize Impact**: Focus on vulnerabilities that could lead to data breach or system compromise
+4. **Provide Evidence**: Include specific file paths, line numbers, and code snippets
+5. **Actionable Advice**: Every finding should include clear, implementable solutions
+6. **Consider Defense in Depth**: Recommend layered security approaches
+7. **Think Like an Attacker**: Consider how multiple vulnerabilities might be chained together
+
+## Quality Assurance
+- Verify all findings with specific code references
+- Ensure remediation suggestions are tested and secure
+- Double-check CVSS scores and severity assessments
+- Validate that recommendations are feasible for the identified technology stack
+
+Begin the analysis by examining the project structure and identifying the primary technologies in use, then systematically work through each security category. Focus on high-impact vulnerabilities first, but be comprehensive in coverage.
