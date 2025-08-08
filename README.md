@@ -1,2 +1,2 @@
-# promtsec
-Prompt Engineering for Security Analyst
+# promteng
+Prompt Engineering Collection
