@@ -1,4 +1,4 @@
-# SecFields - Cybersecurity Grassfileds Fundamental
+# SecFields - Cybersecurity Grassfileds Booklet
 
 Welcome to SecFields - a comprehensive cybersecurity framework specifically designed for financial institutions. This interactive guide explores the critical security domains required for banking operations including Governance & Strategy, Risk Management, Compliance, Fraud Prevention, and operational security.
 
