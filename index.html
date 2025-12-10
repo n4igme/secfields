@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cybersecurity Grassfields — GRC · RED · BLUE</title>
+
+<!-- Simple styling -->
+<style>
+  :root{
+    --bg:#0f1720;
+    --card:#0b1220;
+    --muted:#9aa4b2;
+    --accent:#7dd3fc;
+    --text:#e6eef6;
+    --max-width:980px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:linear-gradient(180deg, #071021 0%, #071725 100%);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+    padding:24px;
+    box-sizing:border-box;
+  }
+
+  /* Container */
+  .wrap{
+    max-width:var(--max-width);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:20px;
+    align-items:start;
+  }
+
+  /* Sidebar / TOC */
+  .toc{
+    position:sticky;
+    top:24px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.03);
+    padding:16px;
+    border-radius:10px;
+    height:calc(100vh - 48px);
+    overflow:auto;
+  }
+  .toc h2{
+    margin:0 0 12px 0;
+    font-size:14px;
+    color:var(--accent);
+    letter-spacing:0.6px;
+  }
+  .toc a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    padding:8px 6px;
+    border-radius:6px;
+    font-size:14px;
+  }
+  .toc a:hover{background:rgba(125,211,252,0.06); color:var(--accent);}
+  .toc .small{color:var(--muted); font-size:12px; margin-top:8px}
+
+  /* Content card */
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:26px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+
+  header.book-header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .title{
+    margin:0;
+    font-size:20px;
+    letter-spacing:0.2px;
+  }
+  .subtitle{color:var(--muted); font-size:13px; margin:4px 0 0 0}
+
+  /* Sections */
+  section.chapter{
+    margin-top:18px;
+  }
+  section.chapter h3{
+    margin:0 0 12px 0;
+    font-size:18px;
+    color:var(--accent);
+  }
+  section.chapter h4{
+    margin:0 0 12px 0;
+    font-size:16px;
+    color:var(--accent);
+  }
+  p{margin:0 0 12px 0; color:var(--text)}
+  ul{margin:0 0 12px 24px;}
+  li{margin:6px 0; color:var(--text)}
+  ol{margin:0 0 12px 24px;}
+  ol li{margin:6px 0; color:var(--text)}
+  code {
+    font-family:var(--mono);
+    font-size:13px;
+    background:rgba(255,255,255,0.1);
+    padding:2px 4px;
+    border-radius:4px;
+  }
+
+  /* Code blocks */
+  pre{
+    background:#071b2a;
+    border-radius:8px;
+    padding:12px;
+    overflow:auto;
+    font-family:var(--mono);
+    font-size:13px;
+    border:1px solid rgba(255,255,255,0.03);
+    color:#d6f3ff;
+  }
+  .code-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .btn {
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--text);
+    padding:6px 8px;
+    border-radius:6px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn.small{padding:4px 8px; font-size:12px;}
+
+  /* Footer actions */
+  .actions{
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+    align-items:center;
+  }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr; padding-bottom:120px;}
+    .toc{position:relative;height:auto;}
+  }
+
+  /* Print friendly */
+  @media print {
+    body{background:white;color:black; padding:0;}
+    .toc, .btn, .actions {display:none;}
+    .card{border:0; background:transparent; padding:0; border-radius:0;}
+  }
+  
+  /* Loading indicator */
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: var(--accent);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+<!-- Optional highlight.js for code syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+<script src="js/markdown-parser.js"></script>
+<div class="wrap">
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Grassfields Booklet</h2>
+    <div id="module-nav">
+      <!-- Module navigation will be loaded here -->
+    </div>
+    <div class="small">Tip: use browser print to save as PDF</div>
+  </nav>
+
+  <main class="card" id="main-content">
+    <header class="book-header">
+      <div>
+        <h1 class="title">Cybersecurity Field — Short Guide</h1>
+        <div class="subtitle">Overview of GRC, Red Team, Blue Team, with concise explanations and examples</div>
+      </div>
+      <div style="margin-left:auto; text-align:right">
+        <div class="actions">
+          <button class="btn" onclick="document.location='#practical'">Jump to examples</button>
+          <button class="btn" onclick="window.print()">Export / Print</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="content-container">
+      <!-- Content will be loaded here -->
+      <div style="text-align: center; padding: 40px;">
+        <div class="loading"></div>
+        <p>Loading content...</p>
+      </div>
+    </div>
+
+    <footer id="main-footer" style="margin-top:18px; color:var(--muted); font-size:13px; display: none;">
+      <div>Author: Nanimonai · Security Engineer</div>
+      <div style="margin-top:6px">License: CC BY-SA — feel free to edit and redistribute</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Module configuration - add your modules here
+  const modules = {
+    'intro': {
+      title: 'Introduction',
+      url: 'modules/intro.md',
+      default: true
+    },
+    'governance': {
+      title: '1. Governance & Strategy',
+      url: 'modules/governance.md'
+    },
+    'risk': {
+      title: '2. Risk Management',
+      url: 'modules/risk.md'
+    },
+    'compliance': {
+      title: '3. Compliance, Audit & Regulatory',
+      url: 'modules/compliance.md'
+    },
+    'architecture': {
+      title: '4. Security Architecture',
+      url: 'modules/security-architecture.md'
+    },
+    'engineering': {
+      title: '5. Security Engineering',
+      url: 'modules/security-engineering.md'
+    },
+    'iam': {
+      title: '6. Identity & Access Management',
+      url: 'modules/iam.md'
+    },
+    'redteam': {
+      title: '7. Red Team / Offensive Security',
+      url: 'modules/redteam.md'
+    },
+    'blueteam': {
+      title: '8. Blue Team / Detection & Response',
+      url: 'modules/blueteam.md'
+    },
+    'threatintel': {
+      title: '9. Threat Intelligence',
+      url: 'modules/threat-intel.md'
+    },
+    'cloud': {
+      title: '10. Cloud & Infrastructure Security',
+      url: 'modules/cloud-security.md'
+    },
+    'endpoint': {
+      title: '11. Endpoint & Device Security',
+      url: 'modules/endpoint-security.md'
+    },
+    'data': {
+      title: '12. Data Security',
+      url: 'modules/data-security.md'
+    },
+    'network': {
+      title: '13. Network Security',
+      url: 'modules/network-security.md'
+    },
+    'fraud': {
+      title: '14. Fraud & Cyber-Fraud Security',
+      url: 'modules/fraud-security.md'
+    },
+    'continuity': {
+      title: '15. Business Continuity & Disaster Recovery',
+      url: 'modules/business-continuity.md'
+    },
+    'physical': {
+      title: '16. Physical & Operational Security',
+      url: 'modules/physical-security.md'
+    },
+    'customer': {
+      title: '17. Customer-Facing Security',
+      url: 'modules/customer-security.md'
+    },
+    'metrics': {
+      title: '18. Metrics & Reporting',
+      url: 'modules/metrics-reporting.md'
+    },
+    'practical': {
+      title: 'Practical Examples',
+      url: 'modules/practical.md'
+    },
+    'references': {
+      title: 'References & Next Steps',
+      url: 'modules/references.md'
+    }
+  };
+
+  // Build navigation based on modules
+  function buildNavigation() {
+    const navContainer = document.getElementById('module-nav');
+    navContainer.innerHTML = '';
+    
+    for (const [id, module] of Object.entries(modules)) {
+      const navItem = document.createElement('a');
+      navItem.href = `#${id}`;
+      navItem.textContent = module.title;
+      navItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadModule(id);
+      });
+      navContainer.appendChild(navItem);
+    }
+  }
+
+  // Load module content
+  async function loadModule(moduleId) {
+    const module = modules[moduleId];
+    if (!module) return;
+
+    const contentContainer = document.getElementById('content-container');
+    contentContainer.innerHTML = `
+      <div style="text-align: center; padding: 40px;">
+        <div class="loading"></div>
+        <p>Loading ${module.title}...</p>
+      </div>
+    `;
+
+    try {
+      const response = await fetch(module.url);
+      if (!response.ok) throw new Error(`Failed to load module: ${response.status}`);
+      const markdownContent = await response.text();
+
+      // Convert markdown to HTML
+      const htmlContent = parseMarkdownToHTML(markdownContent);
+
+      // Wrap the content in a section for consistent styling
+      contentContainer.innerHTML = `<section class="chapter">${htmlContent}</section>`;
+
+      // Update URL hash without scrolling
+      history.replaceState(null, '', `#${moduleId}`);
+
+      // Highlight active link
+      document.querySelectorAll('.toc a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${moduleId}`) {
+          link.classList.add('active');
+        }
+      });
+
+      // Apply syntax highlighting if available
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach((block) => {
+          try { hljs.highlightElement(block); } catch(e){}
+        });
+      }
+    } catch (error) {
+      contentContainer.innerHTML = `
+        <div style="padding: 20px; text-align: center; color: #ff6b6b;">
+          <h3>Error loading content</h3>
+          <p>Could not load module: ${module.title}</p>
+          <p>Make sure the module file exists at: ${module.url}</p>
+        </div>
+      `;
+      console.error('Error loading module:', error);
+    }
+  }
+
+  // Initialize the application
+  function initApp() {
+    buildNavigation();
+    
+    // Check for hash in URL
+    const hash = window.location.hash.substring(1);
+    const moduleId = hash && modules[hash] ? hash : Object.keys(modules).find(id => modules[id].default) || 'intro';
+    
+    loadModule(moduleId);
+    
+    // Set up hash change listener
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && modules[hash]) {
+        loadModule(hash);
+      }
+    });
+  }
+
+  // Copy section functionality
+  function copySection(selector) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(()=> {
+      alert('Section copied to clipboard. Paste in your editor to reuse.');
+    }, ()=> {
+      alert('Copy failed. Select and copy manually.');
+    });
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>
