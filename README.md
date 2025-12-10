@@ -1,4 +1,4 @@
-# SecFields - Cybersecurity Grassfileds Booklet
+# SecFields - Cybersecurity Knowledge Base
 
 Welcome to SecFields - a comprehensive cybersecurity framework specifically designed for financial institutions. This interactive guide explores the critical security domains required for banking operations including Governance & Strategy, Risk Management, Compliance, Fraud Prevention, and operational security.
 
@@ -6,26 +6,27 @@ Welcome to SecFields - a comprehensive cybersecurity framework specifically desi
 
 This interactive framework aims to provide comprehensive information about cybersecurity domains specifically tailored for financial institutions. The modular system allows for easy expansion of content while maintaining focus on banking-specific requirements and regulatory compliance.
 
-**Complete Banking Security Domains:**
+**Available Security Domains:**
 
-1. **Governance & Strategy**: High-level direction, ownership, and structure including security strategy, organizational structure, and board reporting
-2. **Risk Management**: How banks identify and handle cyber risk with quantification, enterprise risk mapping, and scenario modeling
-3. **Compliance, Audit & Regulatory**: Regulatory obligations, internal/external audits, and continuous compliance monitoring
-4. **Security Architecture**: Designing the bank's security foundation with zero trust, identity architecture, and network segmentation
-5. **Security Engineering**: Building security into systems with SSDLC, secure coding, and infrastructure hardening
-6. **Identity & Access Management**: Critical IAM controls for financial institutions with privileged access and customer identity
-7. **Red Team / Offensive Security**: Organizational penetration testing, threat emulation, and vulnerability management
-8. **Blue Team / Detection & Response**: Operational defense with SOC operations, threat hunting, and incident response
-9. **Threat Intelligence**: Understanding threats specific to banking with actor tracking and fraud pattern analysis
-10. **Cloud & Infrastructure Security**: Bank-specific cloud guardrails and hybrid architecture controls
-11. **Endpoint & Device Security**: Covers staff, branch networks, ATMs, and mobile device management
-12. **Data Security**: Critical data protection with classification, encryption, and customer data handling
-13. **Network Security**: Core protection layer with segmentation and secure connectivity
-14. **Fraud & Cyber-Fraud Security**: Bank-specific fraud detection and prevention mechanisms
-15. **Business Continuity & Disaster Recovery**: Ensuring the bank keeps running during disruptions
-16. **Physical & Operational Security**: Branch operations and insider threat programs
-17. **Customer-Facing Security**: Protecting customers through secure online banking and transaction security
-18. **Metrics & Reporting**: How banks measure and drive security through KPIs and executive reporting
+1. **Governance & Strategy**: High-level direction, ownership, and structure including security strategy, organizational structure, and board reporting ([governance.md](modules/governance.md))
+2. **Risk Management**: How banks identify and handle cyber risk with quantification, enterprise risk mapping, and scenario modeling ([risk.md](modules/risk.md))
+3. **Compliance, Audit & Regulatory**: Regulatory obligations, internal/external audits, and continuous compliance monitoring ([compliance.md](modules/compliance.md))
+4. **Security Architecture**: Designing the bank's security foundation with zero trust, identity architecture, and network segmentation ([security-architecture.md](modules/security-architecture.md))
+5. **Security Engineering**: Building security into systems with SSDLC, secure coding, and infrastructure hardening ([security-engineering.md](modules/security-engineering.md))
+6. **Identity & Access Management**: Critical IAM controls for financial institutions with privileged access and customer identity ([iam.md](modules/iam.md))
+7. **Red Team / Offensive Security**: Organizational penetration testing, threat emulation, and vulnerability management ([redteam.md](modules/redteam.md))
+8. **Blue Team / Detection & Response**: Operational defense with SOC operations, threat hunting, and incident response ([blueteam.md](modules/blueteam.md))
+9. **Threat Intelligence**: Understanding threats specific to banking with actor tracking and fraud pattern analysis ([threat-intel.md](modules/threat-intel.md))
+10. **Cloud & Infrastructure Security**: Bank-specific cloud guardrails and hybrid architecture controls ([cloud-security.md](modules/cloud-security.md))
+11. **Endpoint & Device Security**: Covers staff, branch networks, ATMs, and mobile device management ([endpoint-security.md](modules/endpoint-security.md))
+12. **Data Security**: Critical data protection with classification, encryption, and customer data handling ([data-security.md](modules/data-security.md))
+13. **Network Security**: Core protection layer with segmentation and secure connectivity ([network-security.md](modules/network-security.md))
+14. **Fraud & Cyber-Fraud Security**: Bank-specific fraud detection and prevention mechanisms ([fraud-security.md](modules/fraud-security.md))
+15. **Business Continuity & Disaster Recovery**: Ensuring the bank keeps running during disruptions ([business-continuity.md](modules/business-continuity.md))
+16. **Physical & Operational Security**: Branch operations and insider threat programs ([physical-security.md](modules/physical-security.md))
+17. **Customer-Facing Security**: Protecting customers through secure online banking and transaction security ([customer-security.md](modules/customer-security.md))
+18. **Metrics & Reporting**: How banks measure and drive security through KPIs and executive reporting ([metrics-reporting.md](modules/metrics-reporting.md))
+19. **GRC (Governance, Risk & Compliance)**: Integrated approach to governance, risk management, and compliance ([grc.md](modules/grc.md))
 
 ## Contributing
 
@@ -67,3 +68,13 @@ This site is automatically deployed to GitHub Pages and accessible at: https://n
 All pull requests will be deployed to a preview environment automatically.
 
 ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+Special thanks to everyone who contributes to this project and helps maintain current and relevant cybersecurity information for the financial sector. This framework represents collaborative effort to improve security practices across banking institutions.
+
+For questions or suggestions, feel free to open an issue in the repository or contact the maintainers.
