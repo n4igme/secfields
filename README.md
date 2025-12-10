@@ -27,33 +27,43 @@ This interactive framework aims to provide comprehensive information about cyber
 17. **Customer-Facing Security**: Protecting customers through secure online banking and transaction security
 18. **Metrics & Reporting**: How banks measure and drive security through KPIs and executive reporting
 
-## Modular Framework
-
-This repository uses a modular framework that allows for easy expansion of banking security content. The system separates the user interface from the content, making it simple to add new banking-specific topics by creating individual module files.
-
-- **Modular Version**: `index.html` - Dynamic content loading system (primary file)
-- **Content Modules**: `modules/` - Individual content files that can be easily added or removed
-- **Banking Focus**: All content is tailored specifically for financial institution requirements
-
-## How to Navigate
-
-The guide is organized into numbered security domains that you can access through the navigation menu. Each section contains detailed information about the specific banking cybersecurity domain, including:
-
-- Domain-specific strategies and requirements
-- Banking industry tools and techniques
-- Regulatory compliance considerations
-- Implementation guidance for financial institutions
-
 ## Contributing
 
 We welcome contributions to improve and expand this banking security guide! Feel free to fork this repository and submit pull requests with enhancements, especially those addressing banking-specific security challenges or regulatory requirements.
 
-## License
+### Modular Framework
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This repository uses a modular framework that allows for easy expansion of banking security content. The system separates the user interface from the content, making it simple to add new banking-specific topics by creating individual module files.
 
-## Deployment
+- **Modular Version**: `index.html` - The main file for the dynamic content loading system.
+- **Content Modules**: The `modules/` directory, which holds all the content files.
+- **Banking Focus**: All content is tailored specifically for financial institution requirements.
+
+### How to Add New Content
+
+1.  **Create a Module File**: In the `modules/` directory, create a new Markdown file (e.g., `your-topic.md`). Add your content following the existing format.
+2.  **Register the Module**: Open `index.html` and add your new module to the `modules` JavaScript object:
+
+    ```javascript
+    const modules = {
+      // ... existing modules
+      'your-topic-id': {
+        title: 'Your Topic Title',
+        url: 'modules/your-topic.md'
+      },
+      // ... more modules
+    };
+    ```
+
+3.  **Follow Content Guidelines**:
+    *   Use Markdown headings (`#`, `##`, `###`) for structure.
+    *   Use lists, blockquotes, and code blocks as needed.
+    *   To create a "copy to clipboard" button for a code block, add `[copy]` after the language specifier. For example: ` ```javascript [copy] `
+
+### Deployment
 
 This site is automatically deployed to GitHub Pages and accessible at: https://n4igme.github.io/secfields/
 
-Enable GitHub Pages in your repository settings to deploy the modular framework with all banking security domains.
+All pull requests will be deployed to a preview environment automatically.
+
+## License
