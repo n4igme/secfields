@@ -1,10 +1,10 @@
 # SecFields - Cybersecurity Grassfields Booklet
 
-Welcome to SecFields - a comprehensive cybersecurity framework specifically designed for financial institutions. This interactive guide explores the critical security domains required for banking operations including Governance & Strategy, Risk Management, Compliance, Fraud Prevention, and operational security.
+Welcome to SecFields - a comprehensive, interactive cybersecurity framework specifically designed for financial institutions. This innovative guide explores the critical security domains required for banking operations including Governance & Strategy, Risk Management, Compliance, Fraud Prevention, and operational security, with standardized content and advanced search functionality.
 
 ## About This Project
 
-This interactive framework aims to provide comprehensive information about cybersecurity domains specifically tailored for financial institutions. The modular system allows for easy expansion of content while maintaining focus on banking-specific requirements and regulatory compliance.
+This interactive framework provides comprehensive information about cybersecurity domains specifically tailored for financial institutions. The modular system allows for easy expansion of content while maintaining focus on banking-specific requirements, regulatory compliance, and practical implementation guidance. Each module follows a standardized template structure with Overview, Threat Landscape, Regulatory Alignment, Best Practices, Implementation Guides, Configuration Templates, Checklists, Red Team Perspectives, Case Studies, Metrics, Tools & Resources, and more.
 
 **Available Security Domains:**
 
@@ -27,6 +27,44 @@ This interactive framework aims to provide comprehensive information about cyber
 17. **Customer-Facing Security**: Protecting customers through secure online banking and transaction security ([customer-security.md](modules/customer-security.md))
 18. **Metrics & Reporting**: How banks measure and drive security through KPIs and executive reporting ([metrics-reporting.md](modules/metrics-reporting.md))
 19. **GRC (Governance, Risk & Compliance)**: Integrated approach to governance, risk management, and compliance ([grc.md](modules/grc.md))
+20. **Practical Examples & Implementation**: Real-world applications and implementation guidance ([practical.md](modules/practical.md))
+21. **References & Next Steps**: Comprehensive resources and professional development guidance ([references.md](modules/references.md))
+22. **Introduction**: Foundational concepts and banking security context ([intro.md](modules/intro.md))
+
+## Key Features
+
+### **Standardized Content Structure**
+All modules follow a consistent, comprehensive template including:
+- **Overview and Context**: Clear understanding of each security domain
+- **Threat Landscape**: Current threat environment specific to banking
+- **Regulatory Alignment**: Banking-specific regulatory requirements
+- **Best Practices**: Industry-tested security controls and procedures
+- **Implementation Guides**: Step-by-step implementation procedures
+- **Configuration Templates**: Ready-to-use configuration examples
+- **Checklists**: Practical implementation and operational checklists
+- **Red Team Perspective**: Adversarial viewpoints on security gaps
+- **Case Studies**: Real-world security scenarios and lessons learned
+- **Metrics & Measurement**: Quantitative and qualitative metrics
+- **Tools & Resources**: Industry-standard tools and references
+
+### **Advanced Search Functionality**
+- **Real-time Search**: Instant search results as you type
+- **Content Indexing**: Search across titles and module content
+- **Context Snippets**: Preview of content where terms appear
+- **Term Highlighting**: Visual highlighting of search matches
+- **Ranking**: Results ranked by relevance (titles prioritized)
+
+### **Banking-Specific Focus**
+- **Regulatory Alignment**: Direct alignment with banking regulations (SR 13-19, FFIEC, PCI DSS, etc.)
+- **Financial Context**: Security controls tailored to banking operations
+- **Risk Management**: Banking-specific risk assessment and management approaches
+- **Compliance Integration**: Built-in compliance considerations for all controls
+
+### **Interactive Learning Experience**
+- **Module Navigation**: Seamless navigation between security domains
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Syntax Highlighting**: Code examples with syntax highlighting
+- **Print-Friendly**: Easy conversion to PDF for offline reading
 
 ## Contributing
 
@@ -42,7 +80,34 @@ This repository uses a modular framework that allows for easy expansion of banki
 
 ### How to Add New Content
 
-1.  **Create a Module File**: In the `modules/` directory, create a new Markdown file (e.g., `your-topic.md`). Add your content following the existing format.
+1.  **Create a Module File**: In the `modules/` directory, create a new Markdown file (e.g., `your-topic.md`). Add your content following the standardized format:
+    ```markdown
+    # Module Title
+
+    **Module Version:** 1.1
+    **Last Reviewed:** 2025-12-11
+    **Next Review Due:** 2026-03-11
+    **Target Audience:** [Specify audience]
+    **Estimated Reading Time:** [X] minutes
+
+    ## Overview
+    [Brief overview of the topic...]
+
+    ## Threat Landscape & Current Context
+    [Current threat environment for this domain...]
+
+    ## Regulatory Alignment
+    [Relevant banking regulations and standards...]
+
+    ## Best Practices
+    [Primary and secondary security controls...]
+
+    ## Implementation Guide
+    [Step-by-step implementation process...]
+
+    [Include configuration templates, checklists, red team perspectives, case studies, metrics, tools, cross-references, and appendices as needed]
+    ```
+
 2.  **Register the Module**: Open `index.html` and add your new module to the `modules` JavaScript object:
 
     ```javascript
@@ -57,9 +122,11 @@ This repository uses a modular framework that allows for easy expansion of banki
     ```
 
 3.  **Follow Content Guidelines**:
-    *   Use Markdown headings (`#`, `##`, `###`) for structure.
-    *   Use lists, blockquotes, and code blocks as needed.
-    *   To create a "copy to clipboard" button for a code block, add `[copy]` after the language specifier. For example: ` ```javascript [copy] `
+    *   Use the standardized template structure for consistency
+    *   Include banking-specific context and regulatory references
+    *   Add practical implementation guidance and examples
+    *   Include Red Team perspectives where relevant
+    *   Add configuration templates and checklists for practical use
 
 ### Deployment
 
