@@ -368,11 +368,16 @@
       });
 
       // Apply syntax highlighting if available
-      if (window.hljs) {
-        document.querySelectorAll('pre code').forEach((block) => {
-          try { hljs.highlightElement(block); } catch(e){}
-        });
-      }
+      // Wait a bit to ensure DOM is updated before applying syntax highlighting
+      setTimeout(() => {
+        if (window.hljs) {
+          document.querySelectorAll('pre code').forEach((block) => {
+            try { hljs.highlightElement(block); } catch(e){
+              console.warn('Highlight.js error:', e);
+            }
+          });
+        }
+      }, 100);
     } catch (error) {
       contentContainer.innerHTML = `
         <div style="padding: 20px; text-align: center; color: #ff6b6b;">
