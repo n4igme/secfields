@@ -45,6 +45,16 @@ function parseMarkdownToHTML(markdown) {
       processed = true;
     }
     // Process headers
+    else if (line.trim().startsWith('# ')) {
+      closeCurrentList();
+      html += `<h1>${escapeHtml(line.trim().substring(2))}</h1>`;
+      processed = true;
+    }
+    else if (line.trim().startsWith('## ')) {
+      closeCurrentList();
+      html += `<h2>${escapeHtml(line.trim().substring(3))}</h2>`;
+      processed = true;
+    }
     else if (line.trim().startsWith('### ')) {
       closeCurrentList();
       html += `<h3>${escapeHtml(line.trim().substring(4))}</h3>`;
