@@ -10,6 +10,7 @@ function parseMarkdownToHTML(markdown) {
   let inCodeBlock = false;
   let codeBlockContent = '';
   let currentListType = null; // null, 'ul', or 'ol'
+  let codeLanguage = ''; // Track the language for syntax highlighting
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -19,11 +20,20 @@ function parseMarkdownToHTML(markdown) {
     if (line.trim().startsWith('```')) {
       if (inCodeBlock) {
         // End of code block
-        html += `<pre><code>${codeBlockContent}</code></pre>`;
+        if (codeLanguage && codeLanguage !== '') {
+          // Remove [copy] if present and extract language
+          let langClass = codeLanguage.replace(/\[copy\]/, '').trim();
+          html += `<pre><code class="language-${langClass}">${escapeHtml(codeBlockContent)}</code></pre>`;
+        } else {
+          html += `<pre><code>${escapeHtml(codeBlockContent)}</code></pre>`;
+        }
         codeBlockContent = '';
         inCodeBlock = false;
+        codeLanguage = '';
       } else {
-        // Start of code block
+        // Start of code block - check for language specification
+        let langSpec = line.substring(3).trim(); // Get content after ```
+        codeLanguage = langSpec;
         inCodeBlock = true;
         codeBlockContent = '';
       }
