@@ -16,17 +16,39 @@
     --max-width:980px;
     --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
   }
+
+  .theme-light {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --muted: #64748b;
+    --accent: #0ea5e9;
+    --text: #1e293b;
+    --border: #e2e8f0;
+  }
+
+  .theme-dark {
+    --bg:#0f1720;
+    --card:#0b1220;
+    --muted:#9aa4b2;
+    --accent:#7dd3fc;
+    --text:#e6eef6;
+    --border: rgba(255, 255, 255, 0.03);
+  }
   html,body{height:100%;}
   body{
     margin:0;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background:linear-gradient(180deg, #071021 0%, #071725 100%);
+    background: var(--bg);
     color:var(--text);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     line-height:1.5;
     padding:24px;
     box-sizing:border-box;
+  }
+
+  body:not(.theme-light) {
+    background: linear-gradient(180deg, #071021 0%, #071725 100%);
   }
 
   /* Container */
@@ -43,12 +65,22 @@
   .toc{
     position:sticky;
     top:24px;
-    background:rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.03);
+    background:var(--card);
+    border:1px solid var(--border);
     padding:16px;
     border-radius:10px;
     height:calc(100vh - 48px);
     overflow:auto;
+  }
+
+  /* Ensure default dark theme when no class is applied */
+  body:not(.theme-light) {
+    --bg: #0f1720;
+    --card: #0b1220;
+    --muted: #9aa4b2;
+    --accent: #7dd3fc;
+    --text: #e6eef6;
+    --border: rgba(255, 255, 255, 0.03);
   }
   .toc h2{
     margin:0 0 12px 0;
@@ -69,10 +101,10 @@
 
   /* Content card */
   .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    background:var(--card);
     padding:26px;
     border-radius:12px;
-    border:1px solid rgba(255,255,255,0.03);
+    border:1px solid var(--border);
   }
 
   header.book-header{
@@ -117,14 +149,19 @@
 
   /* Code blocks */
   pre{
-    background:#071b2a;
+    background:var(--card);
     border-radius:8px;
     padding:12px;
     overflow:auto;
     font-family:var(--mono);
     font-size:13px;
-    border:1px solid rgba(255,255,255,0.03);
-    color:#d6f3ff;
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+
+  body:not(.theme-light) pre {
+    background: #071b2a;
+    color: #d6f3ff;
   }
   .code-row{
     display:flex;
@@ -135,7 +172,7 @@
   }
   .btn {
     background:transparent;
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid var(--border);
     color:var(--text);
     padding:6px 8px;
     border-radius:6px;
@@ -192,8 +229,8 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
       <h2>Grassfields Booklet</h2>
       <div class="search-container" style="position: relative; flex-grow: 1; margin-left: 10px;">
-        <input type="text" id="search-input" placeholder="Search modules..." style="width: 100%; padding: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text); border-radius: 4px;"/>
-        <div id="search-results" style="position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border: 1px solid var(--muted); border-radius: 4px; z-index: 100; max-height: 300px; overflow-y: auto; display: none;">
+        <input type="text" id="search-input" placeholder="Search modules..." style="width: 100%; padding: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 4px;"/>
+        <div id="search-results" style="position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border: 1px solid var(--border); border-radius: 4px; z-index: 100; max-height: 300px; overflow-y: auto; display: none;">
           <div id="search-results-content"></div>
         </div>
       </div>
@@ -214,6 +251,9 @@
         <div class="actions">
           <button class="btn" onclick="document.location='#practical'">Jump to examples</button>
           <button class="btn" onclick="window.print()">Export / Print</button>
+          <button class="btn" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+            <span id="theme-icon">🌙</span>
+          </button>
         </div>
       </div>
     </header>
@@ -557,6 +597,50 @@
     const regex = new RegExp(`(${query})`, 'gi');
     return text.replace(regex, '<mark style="background: #ffeb3b; color: #000;">$1</mark>');
   }
+
+  // Theme toggle functionality
+  function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.classList.contains('theme-light') ? 'light' : 'dark';
+
+    if (currentTheme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+
+  function setTheme(themeName) {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+
+    if (themeName === 'light') {
+      body.classList.remove('theme-dark');
+      body.classList.add('theme-light');
+      themeIcon.textContent = '☀️';
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('theme-light');
+      body.classList.add('theme-dark');
+      themeIcon.textContent = '🌙';
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Initialize theme based on saved preference, otherwise default to dark
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'light') {
+      setTheme('light');
+    } else {
+      // Default to dark theme to maintain original appearance
+      setTheme('dark');
+    }
+  }
+
+  // Initialize theme when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initializeTheme);
 </script>
 </body>
 </html>
